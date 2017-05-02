@@ -1,6 +1,9 @@
 package dao;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,6 +29,32 @@ public final class DatabaseConnect {
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
+        }
+    }
+
+    public void resetDatabase() {
+        String string;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            FileReader fileReader = new FileReader(new File("src/main/resources/script.sql"));
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((string = bufferedReader.readLine()) != null) {
+                stringBuilder.append(string);
+            }
+            bufferedReader.close();
+
+            String[] queries = stringBuilder.toString().split(";");
+            Statement statement = getStatement();
+            for (String query : queries) {
+                if (!query.trim().equals("")) {
+                    statement.executeUpdate(query);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            e.printStackTrace();
+            connectionClose();
         }
     }
 
