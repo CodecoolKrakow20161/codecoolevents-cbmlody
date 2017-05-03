@@ -11,12 +11,22 @@
 
 <div class="container">
 
-    <div id="products" class="row list-group">
-
-        <div class="item col-xs-4 col-lg-4" th:each="event,iterStat : ${eventContainer}">
-           <div th:text="${event}"></div>
-        </div>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Date</td>
+                <td>Category</td>
+            </tr>
+        </thead>
+        <tbody th:each="event : ${eventContainer}">
+            <tr th:object="${event}">
+                <td><a th:href="@{*{name}}"><span th:text="*{name}">Name</span></a></td>
+                <td th:text="*{date}">date</td>
+                <td th:text="*{category.getName}">cat</td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>
 
