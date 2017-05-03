@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 public class Category {
     private int id;
     private String name;
@@ -22,7 +23,7 @@ public class Category {
     public static Category find(int id) {
         Category category = null;
         Statement statement = DatabaseConnect.getInstance().getStatement();
-        String query = "SELECT * FROM `category` WHERE id ='" + id + "'";
+        String query = "SELECT * FROM `categories` WHERE id ='" + id + "'";
         try {
             ResultSet resultSet = statement.executeQuery(query);
             if (!resultSet.isBeforeFirst()) {
@@ -33,6 +34,10 @@ public class Category {
             e.printStackTrace();
         }
         return category;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
