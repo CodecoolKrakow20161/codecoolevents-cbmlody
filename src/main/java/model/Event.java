@@ -27,6 +27,30 @@ public class Event {
         this.link = link;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
