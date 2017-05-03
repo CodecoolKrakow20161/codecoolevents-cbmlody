@@ -19,13 +19,15 @@
             <tr>
                 <td>Name</td>
                 <td>Date</td>
+                <td>Time</td>
                 <td>Category</td>
             </tr>
         </thead>
         <tbody th:each="event : ${eventContainer}">
             <tr th:object="${event}">
                 <td><a th:href="@{*{name}}"><span th:text="*{name}">Name</span></a></td>
-                <td th:text="*{date}">date</td>
+                <td th:text="${#dates.format(event.getDate, 'dd / MM / yyyy')}">date</td>
+                <td th:text="${#dates.format(event.getDate, 'HH:mm')}">time</td>
                 <td th:text="*{category.getName}">cat</td>
             </tr>
         </tbody>
