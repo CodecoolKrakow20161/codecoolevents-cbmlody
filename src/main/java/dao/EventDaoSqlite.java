@@ -34,19 +34,18 @@ public class EventDaoSqlite implements EventDao {
 
     @Override
     public List<Event> getAll() {
-        List<Event> events = new ArrayList<>();
+        List<Event> eventList = new ArrayList<>();
         Statement statement = DatabaseConnect.getInstance().getStatement();
         String query = "SELECT * FROM `events`";
         try {
             ResultSet resultSet = statement.executeQuery(query);
-            if (!resultSet.isBeforeFirst()) {
-                return null;
+            while (resultSet.next()) {
+                eventList.add(eventResultSet(resultSet));
             }
-            events.add(eventResultSet(resultSet));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return events;
+        return eventList;
     }
 
     @Override
