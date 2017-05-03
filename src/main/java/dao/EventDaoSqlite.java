@@ -18,7 +18,14 @@ public class EventDaoSqlite implements EventDao {
     }
 
     @Override
-    public void remove() {
+    public void remove(int id) {
+        Statement statement = DatabaseConnect.getInstance().getStatement();
+        String query = "DELETE * FROM `events` WHERE id = '" + id + "'";
+        try {
+            statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
