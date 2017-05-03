@@ -2,11 +2,13 @@ package dao;
 
 import model.Category;
 import model.Event;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,9 +59,20 @@ public class EventDaoSqlite implements EventDao {
         return new Event(
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
-                resultSet.getDate("date"),
+                eventDateHelper(resultSet.getString("date")),
                 resultSet.getString("description"),
-                Category.find(resultSet.getInt("id")),
+                Category.find(resultSet.getInt("category_id")),
                 resultSet.getString("link"));
+    }
+
+    private Date eventDateHelper(String date) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:MM");
+        Date parsedDate = null;
+        try {
+            parsedDate = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parsedDate;
     }
 }
