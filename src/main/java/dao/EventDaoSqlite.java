@@ -55,6 +55,19 @@ public class EventDaoSqlite implements EventDao {
         return null;
     }
 
+    public Event getOne(int id) {
+        Event event = null;
+        Statement statement = DatabaseConnect.getInstance().getStatement();
+        String query = "SELECT * FROM `events` WHERE id ='" + id + "'";
+        try {
+            ResultSet resultSet = statement.executeQuery(query);
+            event = eventResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return event;
+    }
+
     private Event eventResultSet(ResultSet resultSet) throws SQLException {
         return new Event(
                 resultSet.getInt("id"),
