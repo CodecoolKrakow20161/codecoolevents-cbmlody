@@ -1,33 +1,30 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head >
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="css/style.css" th:href="@{~/css/style.css}" rel="stylesheet" type="text/css">
-    <title>Codecool Event Board</title>
+    <title>Event details</title>
 </head>
 <body>
 <div class="header">
     <h1>Codecool <span>Event</span> Board</h1>
 </div>
 <div class="container">
-    <table>
+    <table class="details" th:each="event : ${eventDetails}">
         <thead>
             <tr>
-                <td>Name</td>
-                <td>Date</td>
-                <td>Time</td>
-                <td>Category</td>
+                <td th:text="${event.getName}">Name</td>
             </tr>
         </thead>
-        <tbody th:each="event : ${eventContainer}">
-            <tr th:object="${event}">
-                <td><a href="details.html" th:href="@{'event/'+*{id}}"><span th:text="*{name}">Event</span></a></td>
-                <td th:text="${#dates.format(event.getDate, 'dd.MM.yyyy')}">12.12.2015</td>
-                <td th:text="${#dates.format(event.getDate, 'HH:mm')}">18:00</td>
-                <td th:text="*{category.getName}">Category</td>
+        <tbody>
+            <tr>
+                <td th:text="${event.getDescription}">Details</td>
+            </tr>
+            <tr>
+                <td><a th:href="@{event.getLink}"><span th:text="${event.getLink}">link</span></a></td>
             </tr>
         </tbody>
     </table>
