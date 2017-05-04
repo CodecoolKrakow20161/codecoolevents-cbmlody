@@ -43,26 +43,50 @@ h1 span {
     max-width: 90%;
 }
 
-th, td {
+.event-table th, .event-table td {
     padding: 10px 15px 10px 15px;
     border-bottom: 1px solid #ddd;
     opacity: 0.6;
 }
 
-table {
+.event-table table {
     font-family: Crayon;
     color: whitesmoke;
     font-size: 40px;
 }
 
-thead {
+.event-table thead {
+    color: #72adff;
     font-size: 40px;
     font-weight: bold;
+    opacity: 0.8;
 }
 
-table a {
+.event-table table a {
     color: coral;
     text-decoration: none;
+}
+
+.event-details p.name {
+    font-family: Crayon;
+    font-size: 40px;
+    color: coral;
+    opacity: 0.6;
+}
+
+.event-details p.desc {
+    font-family: Crayon;
+    font-size: 25px;
+    color: whitesmoke;
+    opacity: 0.6;
+}
+
+.event-details a {
+    font-family: Crayon;
+    font-size: 25px;
+    color: darkcyan;
+    text-decoration: none;
+    opacity: 0.6;
 }
 
 .panel-body {
@@ -72,3 +96,4 @@ table a {
     font-family: Crayon;
     color: #ababab;
 }
+

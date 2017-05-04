@@ -12,22 +12,12 @@
 <div class="header">
     <h1>Codecool <span>Event</span> Board</h1>
 </div>
-<div class="container">
-    <table class="details" th:each="event : ${eventDetails}">
-        <thead>
-            <tr>
-                <td th:text="${event.getName}">Name</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td th:text="${event.getDescription}">Details</td>
-            </tr>
-            <tr>
-                <td><a th:href="@{event.getLink}"><span th:text="${event.getLink}">link</span></a></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container" th:each="event: ${eventDetails}">
+    <div class="event-details" th:object="${event}">
+        <p class="name" th:text="*{name}">Name</p>
+        <a th:href="@{*{link}}"><p th:text="*{link}">Link</p></a>
+        <p class="desc" th:text="*{description}">Description</p>
+    </div>
 </div>
 <div th:include="/layout/footer :: copy"></div>
 </body>
