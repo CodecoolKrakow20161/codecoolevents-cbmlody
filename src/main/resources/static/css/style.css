@@ -1,0 +1,74 @@
+@font-face {
+    font-family: KGSecondChancesSketch;
+    src: url("../fonts/KGSecondChancesSketch.ttf");
+    font-weight: normal;
+}
+@font-face {
+    font-family: KGSecondChancesSolid;
+    src: url("../fonts/KGSecondChancesSolid.ttf");
+    font-weight: normal;
+}
+@font-face {
+    font-family: Crayon;
+    src: url("../fonts/DK Crayon Crumble.ttf");
+    font-weight: normal;
+}
+
+body {
+    background-image: url("../images/chalkboard-or-blackboard.jpg");
+    background-position: inherit;
+}
+
+h1 {
+    font-family: KGSecondChancesSketch;
+    font-weight: 100;
+    color: #ffffff;
+    font-size: 60px;
+    opacity: 0.6;
+}
+
+h1 span {
+    font-family: KGSecondChancesSolid;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto 0 auto;
+    max-width: 90%;
+}
+
+th, td {
+    padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.6;
+}
+
+table {
+    font-family: Crayon;
+    color: whitesmoke;
+    font-size: 40px;
+}
+
+thead {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+table a {
+    color: coral;
+    text-decoration: none;
+}
+
+.panel-body {
+    display: flex;
+    justify-content: flex-start;
+    align-self: flex-end;
+    font-family: Crayon;
+    color: #ababab;
+}
