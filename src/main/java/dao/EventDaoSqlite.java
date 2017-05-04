@@ -17,6 +17,15 @@ import java.util.List;
 public class EventDaoSqlite implements EventDao {
     @Override
     public void add() {
+        // TODO: 5/3/17 finish method, need to pass parameters
+        Statement statement = DatabaseConnect.getInstance().getStatement();
+        String query = "INSERT INTO `events` (name, date, description, category_id, link)" +
+                "VALUES (?)";
+        try {
+           statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
