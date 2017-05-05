@@ -30,6 +30,7 @@ h1 {
 h1 span {
     font-family: KGSecondChancesSolid;
 }
+
 .index-header {
     display: flex;
     justify-content: space-around;
@@ -162,6 +163,7 @@ h1 span {
 .add-event table {
     border: 1px dashed rgba(245, 245, 245, 0.5);
 }
+
 .buttons {
     display: flex;
     flex-direction: row;
@@ -177,6 +179,7 @@ input.name {
     font-size: 30px;
     color: coral;
 }
+
 input.link {
     color: darkcyan;
 }
