@@ -16,8 +16,6 @@ public class Main {
         staticFileLocation("/static");
         port(8888);
         DatabaseConnect.getInstance();
-        get("/add", (Request req, Response res) -> new ThymeleafTemplateEngine()
-                .render(CategoryController.renderCategories(req, res)));
         get("/", (request, response) -> new ThymeleafTemplateEngine()
                 .render( new ModelAndView(new HashMap<>(), "product/index")) );
 
@@ -26,6 +24,8 @@ public class Main {
         get("/event/:id/details", (request, response) -> new ThymeleafTemplateEngine()
                 .render( EventController.eventDetails(request, response, Integer.parseInt(request.params(":id"))) )
         );
+        get("/add", (request, response) -> new ThymeleafTemplateEngine()
+                .render( CategoryController.renderCategories(request, response) ));
     }
 
 
