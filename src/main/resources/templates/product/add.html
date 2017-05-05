@@ -13,21 +13,22 @@
     <h1>Codecool <span>Event</span> Board</h1>
 </div>
 <div class="container">
-    <form class="add-event" th:action="*{'/'}" method="post">
-        <input class="name" type="text" placeholder="Event name" required/>
-        <input class="date-time" type="datetime-local" required/>
-        <select name="Category" required>
+    <form class="add-event" method="post">
+        <input class="name" type="text" name="name" placeholder="Event name" required/>
+        <input class="date-time" type="datetime-local" name="date" required/>
+        <select name="category" required>
             <option th:each="category: ${categoriesContainer}">
                 <span th:text="${category.getName}">Cat</span>
             </option>
         </select>
-        <input class="link" type="url" placeholder="https://www.google.com/"/>
-        <textarea rows="5" cols="80" placeholder="Event description" required></textarea>
+        <input class="link" type="url" name="link" placeholder="https://www.google.com/"/>
+        <textarea rows="5" cols="80" name="desc" placeholder="Event description" required></textarea>
         <div class="buttons">
             <input class="button" type="submit">
             <input class="button" type="reset">
         </div>
     </form>
+
 </div>
 <div th:include="/layout/footer :: copy"></div>
 </body>

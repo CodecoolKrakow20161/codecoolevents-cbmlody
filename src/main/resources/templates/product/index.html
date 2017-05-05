@@ -9,29 +9,13 @@
     <title>Codecool Event Board</title>
 </head>
 <body>
-<div class="header">
-    <h1>Codecool <span>Event</span> Board</h1>
-</div>
 <div class="container">
-    <div class="event-table">
-        <table>
-            <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Date</td>
-                    <td>Time</td>
-                    <td>Category</td>
-                </tr>
-            </thead>
-            <tbody th:each="event : ${eventContainer}">
-                <tr th:object="${event}">
-                    <td><a href="details.html" th:href="@{'event/'+*{id}}"><span th:text="*{name}">Event</span></a></td>
-                    <td th:text="${#dates.format(event.getDate, 'dd.MM.yyyy')}">12.12.2015</td>
-                    <td th:text="${#dates.format(event.getDate, 'HH:mm')}">18:00</td>
-                    <td th:text="*{category.getName}">Category</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="index-header">
+        <a href="#" th:href="@{https://www.codecool.pl/}">
+            <img th:src="@{~/images/CodecoolLogo.png}" th:width="120px" th:height="120px" alt="Codecool Logo">
+        </a>
+        <h1>Codecool <span>Event</span> Board</h1>
+        <a href="#" th:href="@{events}">Take me to events</a>
     </div>
 </div>
 <div th:include="/layout/footer :: copy"></div>
