@@ -1,6 +1,5 @@
 package controller;
 
-import dao.EventDao;
 import dao.EventDaoSqlite;
 import spark.ModelAndView;
 import spark.Request;
@@ -12,7 +11,6 @@ import java.util.Map;
 
 public class EventController {
     public static ModelAndView renderProducts(Request req, Response res) {
-        //Get events from database by Dao
         Map params = new HashMap<>();
         params.put("eventContainer", new EventDaoSqlite().getAll());
         return new ModelAndView(params, "product/index");
