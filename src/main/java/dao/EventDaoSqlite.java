@@ -83,7 +83,7 @@ public class EventDaoSqlite implements EventDao {
                 resultSet.getString("name"),
                 eventDateHelper(resultSet.getString("date")),
                 resultSet.getString("description"),
-                Category.find(resultSet.getInt("category_id")),
+                new CategoryDaoSqlite().find(resultSet.getInt("category_id")),
                 resultSet.getString("link"));
     }
 
