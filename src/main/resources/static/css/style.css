@@ -79,7 +79,7 @@ h1 span {
 .event-table table {
     font-family: Crayon;
     color: whitesmoke;
-    font-size: 40px;
+    font-size: 35px;
 }
 
 .event-table thead {
@@ -143,7 +143,7 @@ h1 span {
 
 .add-event input, textarea, select, option{
     font-family: Crayon;
-    font-size: 20px;
+    font-size: 30px;
     background: transparent;
     color: whitesmoke;
     border: none;
@@ -176,7 +176,7 @@ h1 span {
 }
 
 input.name {
-    font-size: 30px;
+    font-size: 35px;
     color: coral;
 }
 
