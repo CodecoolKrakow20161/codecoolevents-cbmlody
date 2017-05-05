@@ -1,10 +1,14 @@
 import controller.CategoryController;
 import controller.EventController;
+import dao.CategoryDaoSqlite;
 import dao.DatabaseConnect;
 import dao.EventDaoSqlite;
 import model.Event;
+import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 import  static spark.Spark.*;
 
@@ -26,6 +30,22 @@ public class Main {
         );
         get("/add", (request, response) -> new ThymeleafTemplateEngine()
                 .render( CategoryController.renderCategories(request, response) ));
+        post("/add", (request, response) -> {
+            Event event = new Event(
+                    request.queryParams("name"),
+                    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(request.queryParams("date")),
+                    request.queryParams("desc"),
+                    new CategoryDaoSqlite().find(request.queryParams("category")),
+                    request.queryParams("link")
+            );
+            new EventDaoSqlite().add(event);
+            response.redirect("/create");
+            return new ThymeleafTemplateEngine();
+        });
+        get("/create", (request, response) -> {
+            response.redirect("/events");
+            return new ThymeleafTemplateEngine();
+        });
     }
 
 
