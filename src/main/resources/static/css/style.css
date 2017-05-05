@@ -34,6 +34,14 @@ h1 span {
 .header {
     display: flex;
     justify-content: space-around;
+    align-items: baseline;
+}
+
+.header a {
+    font-family: Crayon;
+    font-size: 30px;
+    color: darkcyan;
+    text-decoration: none;
 }
 
 .container {
