@@ -45,7 +45,7 @@ h1 span {
 
 .event-table th, .event-table td {
     padding: 10px 15px 10px 15px;
-    border-bottom: 1px solid #ddd;
+    /*border-bottom: 1px solid #ddd;*/
     opacity: 0.6;
 }
 
@@ -67,7 +67,24 @@ h1 span {
     text-decoration: none;
 }
 
-.event-details p.name {
+.event-details {
+    min-width: 500px;
+}
+
+.event-details .details-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.details-head p.date-time {
+    font-family: Crayon;
+    font-size: 30px;
+    color: #72adff;
+    opacity: 0.8;
+}
+
+.details-head p.name {
     font-family: Crayon;
     font-size: 40px;
     color: coral;
@@ -103,7 +120,7 @@ h1 span {
     background: transparent;
     color: whitesmoke;
     border: none;
-    opacity: 0.6;
+    opacity: 0.8;
     display: flex;
     flex-direction: column;
     align-items: center;
