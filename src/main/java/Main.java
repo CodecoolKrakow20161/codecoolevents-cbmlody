@@ -22,7 +22,6 @@ public class Main {
         port(8888);
         DatabaseConnect.getInstance();
         // Always add generic routes to the end
-        get("/", EventController::renderProducts, new ThymeleafTemplateEngine());
         // Equivalent with above
         get("/index", (Request req, Response res) -> new ThymeleafTemplateEngine()
                 .render( EventController.renderProducts(req, res) ));
@@ -30,6 +29,7 @@ public class Main {
                 .render( EventController.eventDetails(req, res, Integer.parseInt(req.params(":id"))) ));
         get("/add", (Request req, Response res) -> new ThymeleafTemplateEngine()
                 .render(CategoryController.renderCategories(req, res)));
+        get("/events", EventController::renderProducts, new ThymeleafTemplateEngine());
     }
 
 
