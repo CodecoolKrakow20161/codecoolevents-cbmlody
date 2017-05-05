@@ -21,4 +21,10 @@ public class EventController {
         event.put("eventDetails", new EventDaoSqlite().getOne(id));
         return new ModelAndView(event, "product/details");
     }
+
+    public static ModelAndView removeEvent(Request req, Response res, int id) {
+        Map event = new HashMap<>();
+        event.put("eventRemove", new EventDaoSqlite().remove(id));
+        return new ModelAndView(event, "product/events");
+    }
 }
