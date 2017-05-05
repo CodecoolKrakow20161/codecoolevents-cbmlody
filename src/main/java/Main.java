@@ -3,12 +3,8 @@ import controller.EventController;
 import dao.DatabaseConnect;
 import dao.EventDaoSqlite;
 import model.Event;
-import spark.Request;
-import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
-import java.util.Date;
-import java.util.List;
 
 import  static spark.Spark.*;
 
@@ -17,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println(new Date());
-        exception(Exception.class, (e, req, res) -> e.printStackTrace());
+        exception(Exception.class, (e, request, response) -> e.printStackTrace());
         staticFileLocation("/static");
         port(8888);
         DatabaseConnect.getInstance();
