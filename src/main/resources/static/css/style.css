@@ -30,6 +30,25 @@ h1 {
 h1 span {
     font-family: KGSecondChancesSolid;
 }
+.index-header {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 80px 0 0 0;
+}
+
+.index-header img {
+    margin: 0 auto 0 auto;
+}
+
+.index-header a {
+    text-align: center;
+    text-decoration: none;
+    font-family: Crayon;
+    font-size: 50px;
+    color: coral;
+    opacity: 0.7;
+}
 
 .header {
     display: flex;
