@@ -1,3 +1,4 @@
+import controller.CategoryController;
 import controller.EventController;
 import dao.DatabaseConnect;
 import dao.EventDaoSqlite;
@@ -23,14 +24,12 @@ public class Main {
         // Always add generic routes to the end
         get("/", EventController::renderProducts, new ThymeleafTemplateEngine());
         // Equivalent with above
-        get("/index", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render( EventController.renderProducts(req, res) );
-        });
-        get("/event/:id", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(
-                    EventController.eventDetails(req, res, Integer.parseInt(req.params(":id"))) );
-        });
-
+        get("/index", (Request req, Response res) -> new ThymeleafTemplateEngine()
+                .render( EventController.renderProducts(req, res) ));
+        get("/event/:id", (Request req, Response res) -> new ThymeleafTemplateEngine()
+                .render( EventController.eventDetails(req, res, Integer.parseInt(req.params(":id"))) ));
+        get("/add", (Request req, Response res) -> new ThymeleafTemplateEngine()
+                .render(CategoryController.renderCategories(req, res)));
     }
 
 
