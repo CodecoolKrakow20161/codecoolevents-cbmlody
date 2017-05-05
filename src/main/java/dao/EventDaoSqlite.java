@@ -62,7 +62,7 @@ public class EventDaoSqlite implements EventDao {
     }
 
     @Override
-    public List<Event> getBy(Date date) {
+    public List<Event> getBy(Category category) {
         return null;
     }
 
