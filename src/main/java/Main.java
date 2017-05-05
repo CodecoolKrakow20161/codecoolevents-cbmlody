@@ -46,6 +46,11 @@ public class Main {
             response.redirect("/events");
             return new ThymeleafTemplateEngine();
         });
+        get("/event/:id/delete", (request, response) -> {
+            EventController.removeEvent(request, response, Integer.parseInt(request.params(":id")));
+            response.redirect("/events");
+            return new ThymeleafTemplateEngine();
+        });
     }
 
 
