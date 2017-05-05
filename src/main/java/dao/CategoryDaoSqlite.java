@@ -11,7 +11,7 @@ import java.util.List;
 public class CategoryDaoSqlite implements CategoryDao {
     @Override
     public List<Category> getAll() {
-        List<Category> categoryList= new ArrayList<>();
+        List<Category> categoryList = new ArrayList<>();
         Statement statement = DatabaseConnect.getInstance().getStatement();
         String query = "SELECT * FROM `categories`";
         try {
