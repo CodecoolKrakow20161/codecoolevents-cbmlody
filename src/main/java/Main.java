@@ -16,16 +16,16 @@ public class Main {
         staticFileLocation("/static");
         port(8888);
         DatabaseConnect.getInstance();
-        // Always add generic routes to the end
-        // Equivalent with above
-        get("/event/:id", (Request req, Response res) -> new ThymeleafTemplateEngine()
-                .render( EventController.eventDetails(req, res, Integer.parseInt(req.params(":id"))) ));
         get("/add", (Request req, Response res) -> new ThymeleafTemplateEngine()
                 .render(CategoryController.renderCategories(req, res)));
         get("/", (request, response) -> new ThymeleafTemplateEngine()
                 .render( new ModelAndView(new HashMap<>(), "product/index")) );
 
         get("/events", EventController::renderProducts, new ThymeleafTemplateEngine());
+
+        get("/event/:id/details", (request, response) -> new ThymeleafTemplateEngine()
+                .render( EventController.eventDetails(request, response, Integer.parseInt(request.params(":id"))) )
+        );
     }
 
 
