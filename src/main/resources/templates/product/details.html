@@ -14,8 +14,11 @@
 </div>
 <div class="container" th:each="event: ${eventDetails}">
     <div class="event-details" th:object="${event}">
-        <p class="name" th:text="*{name}">Name</p>
-        <a th:href="@{*{link}}"><p th:text="*{link}">Link</p></a>
+        <div class="details-head">
+            <p class="name" th:text="*{name}">Name</p>
+            <p class="date-time" th:text="${#dates.format(event.getDate, 'EEE dd MMM  HH:mm')}"></p>
+        </div>
+        <a href="#" th:href="@{*{link}}"><p th:text="*{link}">Link</p></a>
         <p class="desc" th:text="*{description}">Description</p>
     </div>
 </div>
