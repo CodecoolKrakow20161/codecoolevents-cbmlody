@@ -97,10 +97,4 @@ public class EventDaoSqlite implements EventDao {
         }
         return parsedDate;
     }
-
-    private String eventDateHelper(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String parsedDate = dateFormat.format(date);
-        return parsedDate;
-    }
 }
