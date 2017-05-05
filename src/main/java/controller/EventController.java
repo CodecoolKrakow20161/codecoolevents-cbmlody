@@ -13,7 +13,7 @@ public class EventController {
     public static ModelAndView renderProducts(Request req, Response res) {
         Map params = new HashMap<>();
         params.put("eventContainer", new EventDaoSqlite().getAll());
-        return new ModelAndView(params, "product/index");
+        return new ModelAndView(params, "product/events");
     }
 
     public static ModelAndView eventDetails(Request req, Response res, int id) {
