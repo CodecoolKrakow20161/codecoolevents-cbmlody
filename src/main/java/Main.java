@@ -12,7 +12,6 @@ import  static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(new Date());
         exception(Exception.class, (e, request, response) -> e.printStackTrace());
         staticFileLocation("/static");
         port(8888);
