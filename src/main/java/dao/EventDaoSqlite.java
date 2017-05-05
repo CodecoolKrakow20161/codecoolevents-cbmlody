@@ -16,13 +16,16 @@ import java.util.List;
 
 public class EventDaoSqlite implements EventDao {
     @Override
-    public void add() {
-        // TODO: 5/3/17 finish method, need to pass parameters
+    public void add(Event event) {
         Statement statement = DatabaseConnect.getInstance().getStatement();
-        String query = "INSERT INTO `events` (name, date, description, category_id, link)" +
-                "VALUES (?)";
+        String query = "INSERT INTO `events` (name, date, description, category_id, link) VALUES ('"
+                + event.getName() + "','"
+                + event.getFormattedDate() + "','"
+                + event.getDescription() + "','"
+                + event.getCategory().getId() + "','"
+                + event.getLink() + "')";
         try {
-           statement.executeQuery(query);
+           statement.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
