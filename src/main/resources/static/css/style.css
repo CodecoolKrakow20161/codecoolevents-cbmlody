@@ -148,7 +148,7 @@ h1 span {
 
 .add-event input, textarea, select, option{
     font-family: Chalk;
-    font-size: 30px;
+    font-size: 25px;
     background: transparent;
     color: whitesmoke;
     border: none;
