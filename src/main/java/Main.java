@@ -16,6 +16,8 @@ import  static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) {
+        DatabaseConnect.getInstance().queryFromFile("src/main/resources/reset.sql");
+        DatabaseConnect.getInstance().queryFromFile("src/main/resources/data_inject.sql");
         exception(java.sql.SQLException.class, (e, request, response) -> {
             response.status(500);
             response.body(new ThymeleafTemplateEngine()
