@@ -16,7 +16,11 @@ import  static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) {
-        exception(Exception.class, (e, request, response) -> e.printStackTrace());
+        exception(java.sql.SQLException.class, (e, request, response) -> {
+            response.status(500);
+            response.body(new ThymeleafTemplateEngine()
+                    .render( new ModelAndView(new HashMap<>(), "product/500") ));
+        });
         staticFileLocation("/static");
         port(8888);
         DatabaseConnect.getInstance();
