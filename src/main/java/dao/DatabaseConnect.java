@@ -32,12 +32,12 @@ public final class DatabaseConnect {
         }
     }
 
-    public void resetDatabase() {
+    public void queryFromFile(String path) {
         String string;
         StringBuilder stringBuilder = new StringBuilder();
 
         try {
-            FileReader fileReader = new FileReader(new File("src/main/resources/script.sql"));
+            FileReader fileReader = new FileReader(new File(path));
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             while ((string = bufferedReader.readLine()) != null) {
                 stringBuilder.append(string);
