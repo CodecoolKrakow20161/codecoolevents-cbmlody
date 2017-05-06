@@ -1,10 +1,5 @@
 package model;
 
-import dao.DatabaseConnect;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Category {
     private int id;
@@ -19,20 +14,12 @@ public class Category {
         this.name = name;
     }
 
-    public static Category find(int id) {
-        Category category = null;
-        Statement statement = DatabaseConnect.getInstance().getStatement();
-        String query = "SELECT * FROM `category` WHERE id ='" + id + "'";
-        try {
-            ResultSet resultSet = statement.executeQuery(query);
-            if (!resultSet.isBeforeFirst()) {
-                return null;
-            }
-            return new Category( resultSet.getInt("id"), resultSet.getString("name") );
-        } catch ( SQLException e ) {
-            e.printStackTrace();
-        }
-        return category;
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

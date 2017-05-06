@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event {
@@ -25,6 +26,34 @@ public class Event {
         this.description = description;
         this.category = category;
         this.link = link;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public String getFormattedDate() {
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(getDate());
     }
 
     @Override

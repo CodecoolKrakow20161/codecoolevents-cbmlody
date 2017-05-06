@@ -5,17 +5,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="css/style.css" th:href="@{~/css/style.css}" rel="stylesheet" type="text/css">
+    <link href="css/404.css" th:href="@{~/css/404.css}" rel="stylesheet" type="text/css">
     <title>Codecool Event Board</title>
 </head>
 <body>
 <div class="container">
-    <div class="index-header">
-        <a href="#" th:href="@{https://www.codecool.pl/}">
-            <img th:src="@{~/images/CodecoolLogo.png}" th:width="120px" th:height="120px" alt="Codecool Logo">
-        </a>
-        <h1>Codecool <span>Event</span> Board</h1>
-        <a href="#" th:href="@{events}">Take me to events</a>
+    <div class="header">
+        <p class="code">404</p>
+        <p>Board you were trying to reach does not exist</p>
+        <a th:href="@{~/}" href="#">Take me to main page</a>
     </div>
 </div>
 <div th:include="/layout/footer :: copy"></div>
