@@ -20,7 +20,7 @@ public class EventDaoSqlite implements EventDao {
         String query = "INSERT INTO `events` (name, date, description, category_id, link) VALUES ('"
                 + event.getName() + "','"
                 + event.getFormattedDate() + "','"
-                + event.getDescription() + "','"
+                + event.getDescription().replaceAll("'", "''") + "','"
                 + event.getCategory().getId() + "','"
                 + event.getLink() + "')";
         try {

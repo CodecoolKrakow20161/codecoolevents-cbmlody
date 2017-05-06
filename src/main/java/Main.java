@@ -20,6 +20,8 @@ public class Main {
         staticFileLocation("/static");
         port(8888);
         DatabaseConnect.getInstance();
+        notFound((request, response) -> new ThymeleafTemplateEngine()
+                .render( new ModelAndView(new HashMap<>(), "product/404") ));
         get("/", (request, response) -> new ThymeleafTemplateEngine()
                 .render( new ModelAndView(new HashMap<>(), "product/index")) );
 

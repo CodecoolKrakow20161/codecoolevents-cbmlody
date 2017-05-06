@@ -1,0 +1,51 @@
+@font-face {
+    font-family: KGSecondChancesSketch;
+    src: url("../fonts/KGSecondChancesSketch.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Chalk;
+    src: url("../fonts/DJB Chalk It Up.ttf");
+    font-weight: normal;
+}
+
+body {
+    background-image: url("../images/chalkboard-or-blackboard.jpg");
+    background-position: inherit;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: whitesmoke;
+    opacity: 0.6;
+}
+
+.header .code {
+    font-family: KGSecondChancesSketch;
+    font-size: 100px;
+    margin: 40px 0 20px 0;
+}
+
+.header p {
+    color: whitesmoke;
+    font-family: Chalk;
+    font-size: 25px;
+}
+
+.header a {
+    color: coral;
+    font-family: Chalk;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.panel-body {
+    display: flex;
+    justify-content: flex-start;
+    align-self: flex-end;
+    font-family: Chalk;
+    color: #ababab;
+}
