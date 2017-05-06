@@ -158,6 +158,7 @@ h1 span {
     width: 480px;
     text-align: center;
     padding: 10px;
+    resize: vertical;
 }
 
 .add-event select, option {
