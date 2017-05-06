@@ -5,8 +5,8 @@
 }
 
 @font-face {
-    font-family: Crayon;
-    src: url("../fonts/DK Crayon Crumble.ttf");
+    font-family: Chalk;
+    src: url("../fonts/DJB Chalk It Up.ttf");
     font-weight: normal;
 }
 
@@ -31,13 +31,13 @@ body {
 
 .header p {
     color: whitesmoke;
-    font-family: Crayon;
+    font-family: Chalk;
     font-size: 25px;
 }
 
 .header a {
-    color: #72adff;
-    font-family: Crayon;
+    color: coral;
+    font-family: Chalk;
     text-decoration: none;
     font-size: 20px;
 }
@@ -46,6 +46,6 @@ body {
     display: flex;
     justify-content: flex-start;
     align-self: flex-end;
-    font-family: Crayon;
+    font-family: Chalk;
     color: #ababab;
 }
