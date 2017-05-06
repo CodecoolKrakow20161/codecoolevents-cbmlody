@@ -176,6 +176,10 @@ h1 span {
     width: 480px;
 }
 
+.button {
+    justify-content: center;
+}
+
 .button[type="reset"] {
     color: coral;
 }
