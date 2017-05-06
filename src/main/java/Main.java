@@ -23,15 +23,16 @@ public class Main {
         notFound((request, response) -> new ThymeleafTemplateEngine()
                 .render( new ModelAndView(new HashMap<>(), "product/404") ));
         get("/", (request, response) -> new ThymeleafTemplateEngine()
-                .render( new ModelAndView(new HashMap<>(), "product/index")) );
-
+                .render( new ModelAndView(new HashMap<>(), "product/index") )
+        );
         get("/events", EventController::renderProducts, new ThymeleafTemplateEngine());
 
         get("/event/:id/details", (request, response) -> new ThymeleafTemplateEngine()
                 .render( EventController.eventDetails(request, response, Integer.parseInt(request.params(":id"))) )
         );
         get("/add", (request, response) -> new ThymeleafTemplateEngine()
-                .render( CategoryController.renderCategories(request, response) ));
+                .render( CategoryController.renderCategories(request, response) )
+        );
         post("/add", (request, response) -> {
             Event event = new Event(
                     request.queryParams("name"),
