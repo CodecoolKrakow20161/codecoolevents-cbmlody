@@ -40,14 +40,13 @@ public class Main {
                 .render( CategoryController.renderCategories(request, response) )
         );
         post("/add", (request, response) -> {
-            Event event = new Event(
+            new EventDaoSqlite().add(new Event(
                     request.queryParams("name"),
                     new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(request.queryParams("date")),
                     request.queryParams("desc"),
                     new CategoryDaoSqlite().find(request.queryParams("category")),
                     request.queryParams("link")
-            );
-            new EventDaoSqlite().add(event);
+            ));
             response.redirect("/create");
             return new ThymeleafTemplateEngine();
         });
