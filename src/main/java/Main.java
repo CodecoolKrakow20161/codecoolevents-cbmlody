@@ -59,6 +59,25 @@ public class Main {
             response.redirect("/events");
             return new ThymeleafTemplateEngine();
         });
+        get("/event/:id/edit", (request, response) -> new ThymeleafTemplateEngine()
+                .render( EventController.editEvent(request, response, Integer.parseInt(request.params(":id"))) )
+        );
+        post("/event/:id/edit", ((request, response) -> {
+            new EventDaoSqlite().edit( new Event(
+                    Integer.parseInt(request.params(":id")),
+                    request.queryParams("name"),
+                    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(request.queryParams("date")),
+                    request.queryParams("desc"),
+                    new CategoryDaoSqlite().find(request.queryParams("category")),
+                    request.queryParams("link")
+            ));
+            response.redirect("/update");
+            return new ThymeleafTemplateEngine();
+        }));
+        get("/update", (request, response) -> {
+            response.redirect("/events");
+            return new ThymeleafTemplateEngine();
+        });
     }
 
 

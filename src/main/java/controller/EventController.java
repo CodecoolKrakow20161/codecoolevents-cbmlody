@@ -1,5 +1,6 @@
 package controller;
 
+import dao.CategoryDaoSqlite;
 import dao.EventDaoSqlite;
 import spark.ModelAndView;
 import spark.Request;
@@ -19,13 +20,20 @@ public class EventController {
 
     public static ModelAndView eventDetails(Request req, Response res, int id) throws SQLException{
         Map event = new HashMap<>();
-        event.put("eventDetails", new EventDaoSqlite().getOne(id));
+        event.put("eventDetails", new EventDaoSqlite().find(id));
         return new ModelAndView(event, "product/details");
     }
 
-    public static ModelAndView removeEvent(Request req, Response res, int id) {
+    public static ModelAndView removeEvent(Request req, Response res, int id) throws SQLException {
         Map event = new HashMap<>();
         event.put("eventRemove", new EventDaoSqlite().remove(id));
         return new ModelAndView(event, "product/events");
+    }
+
+    public static ModelAndView editEvent(Request req, Response res, int id) throws SQLException{
+        Map event = new HashMap<>();
+        event.put("eventEdit", new EventDaoSqlite().find(id));
+        event.put("categories", new CategoryDaoSqlite().getAll());
+        return new ModelAndView(event, "product/edit");
     }
 }
