@@ -51,7 +51,7 @@ public class EventDaoSqlite implements EventDao {
     public List<Event> getAll() throws SQLException {
         List<Event> eventList = new ArrayList<>();
         Statement statement = DatabaseConnect.getInstance().getStatement();
-        String query = "SELECT * FROM `events`";
+        String query = "SELECT * FROM `events` ORDER BY date";
         ResultSet resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
             eventList.add(eventResultSet(resultSet));
