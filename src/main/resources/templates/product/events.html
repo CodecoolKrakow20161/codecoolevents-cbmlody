@@ -14,6 +14,14 @@
     <a href="#" th:href="@{add}">Add event</a>
 </div>
 <div class="container">
+    <div class="filters">
+        <input type="text" id="user-input" onkeyup="searchFilter()" placeholder="Search by name.." title="Type in a name">
+        <label for="cat-filter">Category:</label>
+        <select name="cat-filter" id="cat-filter" onchange="searchFilter()">
+            <option th:value="All" selected>All</option>
+            <option th:each="category : ${categories}" th:text="${category.name}"></option>
+        </select>
+    </div>
     <div class="event-table">
         <table>
             <thead>
