@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 public class EventController {
-    public static ModelAndView renderProducts(Request req, Response res) throws SQLException{
+    public static ModelAndView renderEvents(Request req, Response res) throws SQLException{
         Map params = new HashMap<>();
         params.put("eventContainer", new EventDaoSqlite().getAll());
         params.put("categories", new CategoryDaoSqlite().getAll());

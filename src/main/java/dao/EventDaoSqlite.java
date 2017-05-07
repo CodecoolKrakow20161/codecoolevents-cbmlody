@@ -59,11 +59,6 @@ public class EventDaoSqlite implements EventDao {
         return eventList;
     }
 
-    @Override
-    public List<Event> getBy(Category category) throws SQLException {
-        return null;
-    }
-
     public Event find(int id) throws SQLException {
         String query = "SELECT * FROM `events` WHERE id ='" + id + "';";
         return executeEventQuery(query);
