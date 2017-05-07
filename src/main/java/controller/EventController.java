@@ -15,6 +15,7 @@ public class EventController {
     public static ModelAndView renderProducts(Request req, Response res) throws SQLException{
         Map params = new HashMap<>();
         params.put("eventContainer", new EventDaoSqlite().getAll());
+        params.put("categories", new CategoryDaoSqlite().getAll());
         return new ModelAndView(params, "product/events");
     }
 

@@ -28,6 +28,7 @@ h1 {
     color: whitesmoke;
     font-size: 60px;
     opacity: 0.6;
+    text-align: center;
 }
 
 h1 span {
@@ -58,6 +59,8 @@ h1 span {
     display: flex;
     justify-content: space-around;
     align-items: baseline;
+    max-width: 70%;
+    margin: 0 auto 0 auto;
 }
 
 .header a {
@@ -69,9 +72,53 @@ h1 span {
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     margin: 0 auto 0 auto;
     max-width: 70%;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    height: 23px;
+    margin: 0 0 30px 0;
+}
+
+.filters input {
+    background: none;
+    font-family: Chalk;
+    font-size: 20px;
+    color: #e99cf5;
+    opacity: 0.7;
+    border: none;
+    width: 75%;
+}
+
+.filters select {
+    font-family: Chalk;
+    font-size: 20px;
+    color: #e99cf5;
+    display: inline-block;
+    opacity: 0.7;
+    width: 25%;
+    padding: 0;
+    margin: 0 0 0 15px;
+}
+
+.filters option {
+    font-size: 20px;
+    color: #1589a2;
+}
+
+.filters label {
+    display: inline-block;
+    font-family: Chalk;
+    font-size: 20px;
+    line-height: 25px;
+    color: whitesmoke;
+    opacity: 0.6;
 }
 
 .event-table th, .event-table td {
@@ -159,7 +206,11 @@ h1 span {
     align-items: center;
     width: 550px;
     text-align: center;
+    margin: 0 auto 0 auto;
     padding: 10px;
+}
+
+.add-event textarea {
     resize: vertical;
 }
 
@@ -172,6 +223,7 @@ h1 span {
 }
 
 .buttons {
+    margin: 0 auto 0 auto;
     display: flex;
     flex-direction: row;
     flex: 1 auto;
