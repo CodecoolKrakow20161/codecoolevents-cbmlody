@@ -48,7 +48,7 @@ public class EventDaoSqlite implements EventDao {
     }
 
     @Override
-    public List<Event> getAll() throws SQLException{
+    public List<Event> getAll() throws SQLException {
         List<Event> eventList = new ArrayList<>();
         Statement statement = DatabaseConnect.getInstance().getStatement();
         String query = "SELECT * FROM `events`";
@@ -64,10 +64,14 @@ public class EventDaoSqlite implements EventDao {
         return null;
     }
 
-    public Event getOne(int id) throws SQLException{
+    public Event find(int id) throws SQLException {
+        String query = "SELECT * FROM `events` WHERE id ='" + id + "';";
+        return executeEventQuery(query);
+    }
+
+    private Event executeEventQuery(String query) throws SQLException {
         Event event = null;
         Statement statement = DatabaseConnect.getInstance().getStatement();
-        String query = "SELECT * FROM `events` WHERE id ='" + id + "'";
         ResultSet resultSet = statement.executeQuery(query);
         event = eventResultSet(resultSet);
         return event;
