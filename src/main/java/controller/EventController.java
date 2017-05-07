@@ -19,7 +19,7 @@ public class EventController {
 
     public static ModelAndView eventDetails(Request req, Response res, int id) throws SQLException{
         Map event = new HashMap<>();
-        event.put("eventDetails", new EventDaoSqlite().getOne(id));
+        event.put("eventDetails", new EventDaoSqlite().find(id));
         return new ModelAndView(event, "product/details");
     }
 
