@@ -33,9 +33,9 @@
                     <td>Action</td>
                 </tr>
             </thead>
-            <tbody th:each="event : ${eventContainer}">
-                <tr th:object="${event}">
-                    <td><a href="#" th:href="@{event/{id}/details(id=*{id})}"><span th:text="*{name}">Event</span></a></td>
+            <tbody id="to-search">
+                <tr th:each="event : ${eventContainer}" th:object="${event}">
+                    <td class="name"><a href="#" th:href="@{event/{id}/details(id=*{id})}"><span th:text="*{name}">Event</span></a></td>
                     <td th:text="${#dates.format(event.getDate, 'dd.MM.yyyy')}">12.12.2015</td>
                     <td th:text="${#dates.format(event.getDate, 'HH:mm')}">18:00</td>
                     <td th:text="*{category.getName}">Category</td>
