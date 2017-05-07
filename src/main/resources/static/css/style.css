@@ -4,31 +4,32 @@
     font-weight: normal;
 }
 @font-face {
-    font-family: KGSecondChancesSolid;
-    src: url("../fonts/KGSecondChancesSolid.ttf");
+    font-family: KGBrokenVessels;
+    src: url("../fonts/KGBrokenVesselsSketch.ttf");
     font-weight: normal;
 }
 @font-face {
-    font-family: Crayon;
-    src: url("../fonts/DK Crayon Crumble.ttf");
+    font-family: Chalk;
+    src: url("../fonts/DJB Chalk It Up.ttf");
     font-weight: normal;
 }
 
 body {
     background-image: url("../images/chalkboard-or-blackboard.jpg");
     background-position: inherit;
+    background-size: cover;
 }
 
 h1 {
     font-family: KGSecondChancesSketch;
     font-weight: 100;
-    color: #ffffff;
+    color: whitesmoke;
     font-size: 60px;
     opacity: 0.6;
 }
 
 h1 span {
-    font-family: KGSecondChancesSolid;
+    font-family: KGBrokenVessels;
 }
 
 .index-header {
@@ -45,8 +46,8 @@ h1 span {
 .index-header a {
     text-align: center;
     text-decoration: none;
-    font-family: Crayon;
-    font-size: 50px;
+    font-family: Chalk;
+    font-size: 40px;
     color: coral;
     opacity: 0.7;
 }
@@ -58,7 +59,7 @@ h1 span {
 }
 
 .header a {
-    font-family: Crayon;
+    font-family: Chalk;
     font-size: 30px;
     color: darkcyan;
     text-decoration: none;
@@ -68,7 +69,7 @@ h1 span {
     display: flex;
     justify-content: space-around;
     margin: 0 auto 0 auto;
-    max-width: 90%;
+    max-width: 70%;
 }
 
 .event-table th, .event-table td {
@@ -77,16 +78,19 @@ h1 span {
 }
 
 .event-table table {
-    font-family: Crayon;
+    font-family: Chalk;
     color: whitesmoke;
     font-size: 35px;
 }
 
 .event-table thead {
     color: #72adff;
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 35px;
     opacity: 0.8;
+}
+
+.event-table tbody {
+    font-size: 25px;
 }
 
 .event-table table a {
@@ -102,31 +106,32 @@ h1 span {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: baseline;
 }
 
 .details-head p.date-time {
-    font-family: Crayon;
+    font-family: Chalk;
     font-size: 30px;
     color: #72adff;
     opacity: 0.8;
 }
 
 .details-head p.name {
-    font-family: Crayon;
+    font-family: Chalk;
     font-size: 40px;
     color: coral;
     opacity: 0.6;
 }
 
 .event-details p.desc {
-    font-family: Crayon;
+    font-family: Chalk;
     font-size: 25px;
     color: whitesmoke;
     opacity: 0.6;
 }
 
 .event-details a {
-    font-family: Crayon;
+    font-family: Chalk;
     font-size: 25px;
     color: darkcyan;
     text-decoration: none;
@@ -137,23 +142,23 @@ h1 span {
     display: flex;
     justify-content: flex-start;
     align-self: flex-end;
-    font-family: Crayon;
+    font-family: KGBrokenVessels;
     color: #ababab;
 }
 
 .add-event input, textarea, select, option{
-    font-family: Crayon;
-    font-size: 30px;
+    font-family: Chalk;
+    font-size: 25px;
     background: transparent;
     color: whitesmoke;
     border: none;
     opacity: 0.8;
     display: flex;
-    flex-direction: column;
     align-items: center;
     width: 480px;
     text-align: center;
     padding: 10px;
+    resize: vertical;
 }
 
 .add-event select, option {
@@ -169,6 +174,10 @@ h1 span {
     flex-direction: row;
     flex: 1 auto;
     width: 480px;
+}
+
+.button {
+    justify-content: center;
 }
 
 .button[type="reset"] {

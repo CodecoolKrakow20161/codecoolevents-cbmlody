@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event {
@@ -49,6 +50,10 @@ public class Event {
 
     public String getLink() {
         return link;
+    }
+
+    public String getFormattedDate() {
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(getDate());
     }
 
     @Override
