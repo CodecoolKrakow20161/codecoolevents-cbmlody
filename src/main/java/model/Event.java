@@ -56,6 +56,10 @@ public class Event {
         return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(getDate());
     }
 
+    public String getDateLocal() {
+        return new SimpleDateFormat("yyyy-MM-dd'"+'T'+"'HH:mm").format(getDate());
+    }
+
     @Override
     public String toString() {
         return "Event{" +

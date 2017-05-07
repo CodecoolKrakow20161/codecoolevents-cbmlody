@@ -16,6 +16,8 @@ import  static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) {
+        DatabaseConnect.getInstance().queryFromFile("src/main/resources/reset.sql");
+        DatabaseConnect.getInstance().queryFromFile("src/main/resources/data_inject.sql");
         exception(java.sql.SQLException.class, (e, request, response) -> {
             response.status(500);
             response.body(new ThymeleafTemplateEngine()
@@ -38,14 +40,13 @@ public class Main {
                 .render( CategoryController.renderCategories(request, response) )
         );
         post("/add", (request, response) -> {
-            Event event = new Event(
+            new EventDaoSqlite().add(new Event(
                     request.queryParams("name"),
                     new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(request.queryParams("date")),
                     request.queryParams("desc"),
                     new CategoryDaoSqlite().find(request.queryParams("category")),
                     request.queryParams("link")
-            );
-            new EventDaoSqlite().add(event);
+            ));
             response.redirect("/create");
             return new ThymeleafTemplateEngine();
         });
@@ -55,6 +56,25 @@ public class Main {
         });
         get("/event/:id/delete", (request, response) -> {
             EventController.removeEvent(request, response, Integer.parseInt(request.params(":id")));
+            response.redirect("/events");
+            return new ThymeleafTemplateEngine();
+        });
+        get("/event/:id/edit", (request, response) -> new ThymeleafTemplateEngine()
+                .render( EventController.editEvent(request, response, Integer.parseInt(request.params(":id"))) )
+        );
+        post("/event/:id/edit", ((request, response) -> {
+            new EventDaoSqlite().edit( new Event(
+                    Integer.parseInt(request.params(":id")),
+                    request.queryParams("name"),
+                    new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(request.queryParams("date")),
+                    request.queryParams("desc"),
+                    new CategoryDaoSqlite().find(request.queryParams("category")),
+                    request.queryParams("link")
+            ));
+            response.redirect("/update");
+            return new ThymeleafTemplateEngine();
+        }));
+        get("/update", (request, response) -> {
             response.redirect("/events");
             return new ThymeleafTemplateEngine();
         });
