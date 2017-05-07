@@ -3,11 +3,13 @@
     src: url("../fonts/KGSecondChancesSketch.ttf");
     font-weight: normal;
 }
+
 @font-face {
     font-family: KGBrokenVessels;
     src: url("../fonts/KGBrokenVesselsSketch.ttf");
     font-weight: normal;
 }
+
 @font-face {
     font-family: Chalk;
     src: url("../fonts/DJB Chalk It Up.ttf");
@@ -146,7 +148,7 @@ h1 span {
     color: #ababab;
 }
 
-.add-event input, textarea, select, option{
+.add-event input, textarea, select, option {
     font-family: Chalk;
     font-size: 25px;
     background: transparent;
