@@ -20,7 +20,7 @@ public class EventDaoSqlite implements EventDao {
         String query = "INSERT INTO `events` (name, date, description, category_id, link) VALUES ('"
                 + event.getName() + "','"
                 + event.getFormattedDate() + "','"
-                + event.getDescription() + "','"
+                + event.getDescription().replaceAll("'", "''") + "','"
                 + event.getCategory().getId() + "','"
                 + event.getLink() + "')";
         try {
@@ -48,17 +48,13 @@ public class EventDaoSqlite implements EventDao {
     }
 
     @Override
-    public List<Event> getAll() {
+    public List<Event> getAll() throws SQLException{
         List<Event> eventList = new ArrayList<>();
         Statement statement = DatabaseConnect.getInstance().getStatement();
         String query = "SELECT * FROM `events`";
-        try {
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                eventList.add(eventResultSet(resultSet));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            eventList.add(eventResultSet(resultSet));
         }
         return eventList;
     }
@@ -68,16 +64,12 @@ public class EventDaoSqlite implements EventDao {
         return null;
     }
 
-    public Event getOne(int id) {
+    public Event getOne(int id) throws SQLException{
         Event event = null;
         Statement statement = DatabaseConnect.getInstance().getStatement();
         String query = "SELECT * FROM `events` WHERE id ='" + id + "'";
-        try {
-            ResultSet resultSet = statement.executeQuery(query);
-            event = eventResultSet(resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        ResultSet resultSet = statement.executeQuery(query);
+        event = eventResultSet(resultSet);
         return event;
     }
 
