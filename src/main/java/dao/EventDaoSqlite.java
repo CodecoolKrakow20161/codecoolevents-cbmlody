@@ -15,40 +15,40 @@ import java.util.List;
 
 public class EventDaoSqlite implements EventDao {
     @Override
-    public void add(Event event) {
+    public void add(Event event) throws SQLException {
         Statement statement = DatabaseConnect.getInstance().getStatement();
         String query = "INSERT INTO `events` (name, date, description, category_id, link) VALUES ('"
                 + event.getName() + "','"
                 + event.getFormattedDate() + "','"
                 + event.getDescription().replaceAll("'", "''") + "','"
                 + event.getCategory().getId() + "','"
-                + event.getLink() + "')";
-        try {
-           statement.executeUpdate(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+                + event.getLink() + "');";
+       statement.executeUpdate(query);
     }
 
     @Override
-    public boolean remove(int id) {
+    public boolean remove(int id) throws SQLException {
         Statement statement = DatabaseConnect.getInstance().getStatement();
-        String query = "DELETE FROM `events` WHERE id = '" + id + "'";
-        try {
-            statement.executeUpdate(query);
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
+        String query = "DELETE FROM `events` WHERE id = '" + id + "';";
+        statement.executeUpdate(query);
+        return true;
     }
 
     @Override
-    public void edit() {
+    public void edit(Event event) throws SQLException{
+        Statement statement = DatabaseConnect.getInstance().getStatement();
+        String query = "UPDATE `events` SET " +
+                "name ='" + event.getName() + "'," +
+                "date = '" + event.getFormattedDate() + "'," +
+                "description = '" + event.getDescription().replaceAll("'", "''") + "'," +
+                "category_id = '" + event.getCategory().getId() + "'," +
+                "link = '" + event.getLink() + "'" +
+                "WHERE id = '" + event.getId() + "';";
+        statement.executeUpdate(query);
     }
 
     @Override
-    public List<Event> getAll() throws SQLException{
+    public List<Event> getAll() throws SQLException {
         List<Event> eventList = new ArrayList<>();
         Statement statement = DatabaseConnect.getInstance().getStatement();
         String query = "SELECT * FROM `events`";
@@ -60,14 +60,18 @@ public class EventDaoSqlite implements EventDao {
     }
 
     @Override
-    public List<Event> getBy(Category category) {
+    public List<Event> getBy(Category category) throws SQLException {
         return null;
     }
 
-    public Event getOne(int id) throws SQLException{
+    public Event find(int id) throws SQLException {
+        String query = "SELECT * FROM `events` WHERE id ='" + id + "';";
+        return executeEventQuery(query);
+    }
+
+    private Event executeEventQuery(String query) throws SQLException {
         Event event = null;
         Statement statement = DatabaseConnect.getInstance().getStatement();
-        String query = "SELECT * FROM `events` WHERE id ='" + id + "'";
         ResultSet resultSet = statement.executeQuery(query);
         event = eventResultSet(resultSet);
         return event;
