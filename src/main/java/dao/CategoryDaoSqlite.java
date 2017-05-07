@@ -10,17 +10,13 @@ import java.util.List;
 
 public class CategoryDaoSqlite implements CategoryDao {
     @Override
-    public List<Category> getAll() {
+    public List<Category> getAll() throws SQLException{
         List<Category> categoryList = new ArrayList<>();
         Statement statement = DatabaseConnect.getInstance().getStatement();
-        String query = "SELECT * FROM `categories`";
-        try {
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                categoryList.add(categoryResultSet(resultSet));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String query = "SELECT * FROM `categories`;";
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            categoryList.add(categoryResultSet(resultSet));
         }
         return categoryList;
     }
@@ -41,15 +37,11 @@ public class CategoryDaoSqlite implements CategoryDao {
         return new Category( resultSet.getInt("id"), resultSet.getString("name") );
     }
 
-    private Category executeQuery (String query) {
+    private Category executeQuery (String query) throws SQLException {
         Category category = null;
         Statement statement = DatabaseConnect.getInstance().getStatement();
-        try {
-            ResultSet resultSet = statement.executeQuery(query);
-            return categoryResultSet(resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        ResultSet resultSet = statement.executeQuery(query);
+        category = categoryResultSet(resultSet);
         return category;
     }
 }
