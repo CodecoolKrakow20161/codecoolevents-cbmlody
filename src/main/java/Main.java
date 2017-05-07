@@ -31,7 +31,7 @@ public class Main {
         get("/", (request, response) -> new ThymeleafTemplateEngine()
                 .render( new ModelAndView(new HashMap<>(), "product/index") )
         );
-        get("/events", EventController::renderProducts, new ThymeleafTemplateEngine());
+        get("/events", EventController::renderEvents, new ThymeleafTemplateEngine());
 
         get("/event/:id/details", (request, response) -> new ThymeleafTemplateEngine()
                 .render( EventController.eventDetails(request, response, Integer.parseInt(request.params(":id"))) )
