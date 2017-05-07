@@ -13,6 +13,4 @@ public interface EventDao {
     void edit(Event event) throws SQLException;
     Event find(int id) throws SQLException;
     List<Event> getAll() throws SQLException;
-    List<Event> getBy(Category category) throws SQLException;
-
 }
