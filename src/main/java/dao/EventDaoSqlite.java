@@ -35,7 +35,16 @@ public class EventDaoSqlite implements EventDao {
     }
 
     @Override
-    public void edit() {
+    public void edit(Event event) throws SQLException{
+        Statement statement = DatabaseConnect.getInstance().getStatement();
+        String query = "UPDATE `events` SET " +
+                "name ='" + event.getName() + "'," +
+                "date = '" + event.getFormattedDate() + "'," +
+                "description = '" + event.getDescription().replaceAll("'", "''") + "'," +
+                "category_id = '" + event.getCategory().getId() + "'," +
+                "link = '" + event.getLink() + "'" +
+                "WHERE id = '" + event.getId() + "';";
+        statement.executeUpdate(query);
     }
 
     @Override
