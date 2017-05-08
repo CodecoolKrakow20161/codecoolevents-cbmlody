@@ -16,6 +16,7 @@ import  static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) {
+        port(getHerokuAssignedPort());
         DatabaseConnect.getInstance().queryFromFile("src/main/resources/reset.sql");
         DatabaseConnect.getInstance().queryFromFile("src/main/resources/data_inject.sql");
         exception(java.sql.SQLException.class, (e, request, response) -> {
@@ -78,6 +79,15 @@ public class Main {
             response.redirect("/events");
             return new ThymeleafTemplateEngine();
         });
+    }
+
+    private static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 8888;
+        }
     }
 
 
