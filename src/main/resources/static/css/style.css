@@ -193,6 +193,8 @@ h1 span {
     align-self: flex-end;
     font-family: KGBrokenVessels;
     color: #ababab;
+    position: fixed;
+    bottom: 0;
 }
 
 .add-event input, textarea, select, option {
