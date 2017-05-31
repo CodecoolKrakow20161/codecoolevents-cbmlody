@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.codecool.events</groupId>
-    <artifactId>events</artifactId>
+    <artifactId>cc-events</artifactId>
     <version>1.0</version>
 
     <dependencies>
@@ -83,7 +83,7 @@
                     <processTypes>
                         <!-- Tell Heroku how to launch your application -->
                         <!-- You might have to remove the ./ in front   -->
-                        <web>java -jar ./target/events-1.0-jar-with-dependencies.jar</web>
+                        <web>java -jar ./target/cc-events-1.0-jar-with-dependencies.jar</web>
                     </processTypes>
                 </configuration>
             </plugin>
