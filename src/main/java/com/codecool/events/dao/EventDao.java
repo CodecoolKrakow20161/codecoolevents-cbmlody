@@ -1,7 +1,7 @@
-package dao;
+package com.codecool.events.dao;
 
-import model.Category;
-import model.Event;
+import com.codecool.events.model.Category;
+import com.codecool.events.model.Event;
 
 import java.sql.SQLException;
 import java.util.List;
