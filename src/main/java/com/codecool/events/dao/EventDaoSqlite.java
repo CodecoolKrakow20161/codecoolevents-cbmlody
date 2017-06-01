@@ -18,7 +18,7 @@ import java.util.List;
 public class EventDaoSqlite implements EventDao {
     @Override
     public void add(Event event) throws Sql2oException {
-        String query = "INSERT INTO events (name, date, description, categoryID, link) VALUES (:name, :date, :desc, :catId, :link);";
+        String query = "INSERT INTO events (name, date, description, category_id, link) VALUES (:name, :date, :desc, :catId, :link);";
         try (Connection con = App.getApp().getConnection()){
             con.createQuery(query).addParameter("name", event.getName())
                     .addParameter("date", event.getFormattedDate())
@@ -41,7 +41,7 @@ public class EventDaoSqlite implements EventDao {
     @Override
     public void edit(Event event) throws Sql2oException {
         String query = "UPDATE events SET name = :name, date = :date, description = :desc, " +
-                "categoryID = :catId, link = :link WHERE id = :id;";
+                "category_id = :catId, link = :link WHERE id = :id;";
         try (Connection con = App.getApp().getConnection()) {
             con.createQuery(query).addParameter("name", event.getName())
                     .addParameter("date", event.getFormattedDate())
@@ -80,7 +80,7 @@ public class EventDaoSqlite implements EventDao {
             String name = row.getString("name");
             Date date = eventDateHelper(row.getString("date"));
             String description = row.getString("description");
-            Category category = new CategoryDaoSqlite().find(row.getInteger("categoryID"));
+            Category category = new CategoryDaoSqlite().find(row.getInteger("category_id"));
             String link = row.getString("link");
             eventList.add(new Event(id, name, date, description, category, link));
         }

@@ -17,8 +17,8 @@ public final class DatabaseConnection {
 
     public void openConnection() {
         try {
-            String dbPath = System.getenv("JDBC_DATABASE_URL");
-            Sql2o sql2o = new Sql2o(dbPath);
+            String dbPath = "jdbc:postgresql://ec2-107-21-108-204.compute-1.amazonaws.com:5432/d3g7vnn5hnehke?&sslmode=require";
+            Sql2o sql2o = new Sql2o(dbPath, "nplmytlzrudpcx", "b7ac87f3e99173a89390fe7b673d058f0bd51fba089e0b9e87df2b4f629452bb");
             connection = sql2o.open();
             System.out.println("Connection with DB established...");
         } catch (Exception e) {
