@@ -6,10 +6,11 @@ import com.codecool.events.dao.CategoryDaoSqlite;
 import com.codecool.events.dao.DatabaseConnection;
 import com.codecool.events.dao.EventDaoSqlite;
 import com.codecool.events.model.Event;
+import org.sql2o.Connection;
+import org.sql2o.Sql2oException;
 import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
-import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
@@ -46,8 +47,9 @@ public class App {
     public void dispatchRoutes() {
         port(getHerokuAssignedPort());
         staticFileLocation("/static");
-        exception(java.sql.SQLException.class, (e, request, response) -> {
+        exception(Sql2oException.class, (e, request, response) -> {
             response.status(500);
+            System.err.println(e.toString());
             response.body(new ThymeleafTemplateEngine()
                     .render( new ModelAndView(new HashMap<>(), "product/500") ));
         });

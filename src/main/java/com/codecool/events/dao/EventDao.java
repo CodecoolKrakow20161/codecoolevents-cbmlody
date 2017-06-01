@@ -1,6 +1,5 @@
 package com.codecool.events.dao;
 
-import com.codecool.events.model.Category;
 import com.codecool.events.model.Event;
 
 import java.sql.SQLException;

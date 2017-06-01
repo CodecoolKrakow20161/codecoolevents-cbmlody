@@ -11,15 +11,15 @@ public class Main {
             System.exit(0);
         }
 
-//        final Thread mainThread = Thread.currentThread();
-//        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-//            System.out.println("Closing db connection...");
-//            App.getApp().closeConnection();
-//            try {
-//                mainThread.join();
-//            } catch (InterruptedException e) {
-//                System.err.println("Error: " + e.toString());
-//            }
-//        }));
+        final Thread mainThread = Thread.currentThread();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Closing db connection...");
+            App.getApp().closeConnection();
+            try {
+                mainThread.join();
+            } catch (InterruptedException e) {
+                System.err.println("Error: " + e.toString());
+            }
+        }));
     }
 }

@@ -1,11 +1,13 @@
 package com.codecool.events.dao;
 
 import com.codecool.events.App;
+import com.codecool.events.model.Category;
 import com.codecool.events.model.Event;
+import org.sql2o.Connection;
+import org.sql2o.Sql2oException;
+import org.sql2o.data.Row;
+import org.sql2o.data.Table;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,65 +17,74 @@ import java.util.List;
 
 public class EventDaoSqlite implements EventDao {
     @Override
-    public void add(Event event) throws SQLException {
-        String query = "INSERT INTO events (name, date, description, category_id, link) VALUES (?, ?, ?, ?, ?);";
-        PreparedStatement prepState = App.getApp().getConnection().prepareStatement(query);
-        prepState.setString(1, event.getName());
-        prepState.setString(2, event.getFormattedDate());
-        prepState.setString(3, event.getDescription());
-        prepState.setInt(4, event.getCategory().getId());
-        prepState.setString(5, event.getLink());
-        prepState.executeUpdate();
+    public void add(Event event) throws Sql2oException {
+        String query = "INSERT INTO events (name, date, description, categoryID, link) VALUES (:name, :date, :desc, :catId, :link);";
+        try (Connection con = App.getApp().getConnection()){
+            con.createQuery(query).addParameter("name", event.getName())
+                    .addParameter("date", event.getFormattedDate())
+                    .addParameter("desc", event.getDescription().replaceAll("'", "''"))
+                    .addParameter("catId", event.getCategory().getId())
+                    .addParameter("link", event.getLink())
+                    .executeUpdate();
+        }
     }
 
     @Override
-    public boolean remove(int id) throws SQLException {
-        String query = "DELETE FROM events WHERE id = (?);";
-        PreparedStatement prepState = App.getApp().getConnection().prepareStatement(query);
-        prepState.setInt(1, id);
-        return prepState.execute();
+    public boolean remove(int id) throws Sql2oException {
+        String query = "DELETE FROM events WHERE id = :id;";
+        try (Connection con = App.getApp().getConnection()) {
+            con.createQuery(query).addParameter("id", id).executeUpdate();
+        }
+        return true;
     }
 
     @Override
-    public void edit(Event event) throws SQLException{
-        String query = "UPDATE events SET name = (?), date = (?), description = (?), " +
-                "category_id = (?), link = (?) WHERE id = (?);";
-        PreparedStatement prepState = App.getApp().getConnection().prepareStatement(query);
-        prepState.setString(1, event.getName());
-        prepState.setString(2, event.getFormattedDate());
-        prepState.setString(3, event.getDescription());
-        prepState.setInt(4, event.getCategory().getId());
-        prepState.setString(5, event.getLink());
-        prepState.setInt(6, event.getId());
-        prepState.executeUpdate();
+    public void edit(Event event) throws Sql2oException {
+        String query = "UPDATE events SET name = :name, date = :date, description = :desc, " +
+                "categoryID = :catId, link = :link WHERE id = :id;";
+        try (Connection con = App.getApp().getConnection()) {
+            con.createQuery(query).addParameter("name", event.getName())
+                    .addParameter("date", event.getFormattedDate())
+                    .addParameter("desc", event.getDescription())
+                    .addParameter("catId", event.getCategory().getId())
+                    .addParameter("link", event.getLink())
+                    .addParameter("id", event.getId())
+                    .executeUpdate();
+        }
     }
 
     @Override
-    public List<Event> getAll() throws SQLException {
+    public List<Event> getAll() throws Sql2oException {
+        String query = "SELECT * FROM events ORDER BY date;";
+        Table tab;
+        try (Connection con = App.getApp().getConnection()) {
+            tab = con.createQuery(query).executeAndFetchTable();
+        }
+        return getEventsFromTable(tab);
+    }
+
+    public Event find(int id) {
+        String query = "SELECT * FROM events WHERE id = :idVal;";
+        Table tab;
+        try (Connection con = App.getApp().getConnection()) {
+            tab = con.createQuery(query).addParameter("idVal", id).executeAndFetchTable();
+        }
+        List<Event> eventList = getEventsFromTable(tab);
+        return eventList.isEmpty() ? null : eventList.get(0);
+    }
+
+    private List<Event> getEventsFromTable(Table table) {
         List<Event> eventList = new ArrayList<>();
-        String query = "SELECT * FROM events ORDER BY date";
-        PreparedStatement prepState = App.getApp().getConnection().prepareStatement(query);
-        ResultSet resultSet = prepState.executeQuery();
-        while (resultSet.next()) {
-            eventList.add(eventResultSet(resultSet));
+        for (Row row : table.rows()) {
+            int id = row.getInteger("id");
+            String name = row.getString("name");
+            Date date = eventDateHelper(row.getString("date"));
+            String description = row.getString("description");
+            Category category = new CategoryDaoSqlite().find(row.getInteger("categoryID"));
+            String link = row.getString("link");
+            eventList.add(new Event(id, name, date, description, category, link));
         }
         return eventList;
-    }
-
-    public Event find(int id) throws SQLException {
-        String query = "SELECT * FROM events WHERE id =(?);";
-        PreparedStatement prepState = App.getApp().getConnection().prepareStatement(query);
-        return eventResultSet(prepState.executeQuery());
-    }
-
-    private Event eventResultSet(ResultSet resultSet) throws SQLException {
-        return new Event(
-                resultSet.getInt("id"),
-                resultSet.getString("name"),
-                eventDateHelper(resultSet.getString("date")),
-                resultSet.getString("description"),
-                new CategoryDaoSqlite().find(resultSet.getInt("category_id")),
-                resultSet.getString("link"));
     }
 
     private Date eventDateHelper(String date) {

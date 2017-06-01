@@ -1,13 +1,12 @@
 package com.codecool.events.dao;
 
 
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public final class DatabaseConnection {
     private Connection connection;
@@ -18,10 +17,9 @@ public final class DatabaseConnection {
 
     public void openConnection() {
         try {
-            Class.forName("org.postgresql.Driver");
             String dbPath = System.getenv("JDBC_DATABASE_URL");
-//            connection = DriverManager.getConnection("jdbc:postgresql://ec2-107-21-108-204.compute-1.amazonaws.com:5432/d3g7vnn5hnehke?user=nplmytlzrudpcx&password=b7ac87f3e99173a89390fe7b673d058f0bd51fba089e0b9e87df2b4f629452bb&sslmode=require");
-            connection = DriverManager.getConnection(dbPath);
+            Sql2o sql2o = new Sql2o(dbPath);
+            connection = sql2o.open();
             System.out.println("Connection with DB established...");
         } catch (Exception e) {
             System.err.println("Error: " + e.toString());
@@ -41,10 +39,9 @@ public final class DatabaseConnection {
             bufferedReader.close();
 
             String[] queries = stringBuilder.toString().split(";");
-            Statement statement = getStatement();
             for (String query : queries) {
                 if (!query.trim().equals("")) {
-                    statement.executeUpdate(query);
+                    connection.createQuery(query).executeUpdate();
                 }
             }
         } catch (Exception e) {
@@ -57,18 +54,9 @@ public final class DatabaseConnection {
     public void connectionClose() {
         try {
             connection.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.err.println("Error: " + e.toString());
         }
-    }
-
-    private Statement getStatement() {
-        try {
-            return connection.createStatement();
-        } catch (SQLException e) {
-            System.err.println("Error: " + e.toString());
-        }
-        return null;
     }
 
     public Connection getConnection() {
