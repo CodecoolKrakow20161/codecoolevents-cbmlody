@@ -1,6 +1,6 @@
-package controller;
+package com.codecool.events.controller;
 
-import dao.CategoryDaoSqlite;
+import com.codecool.events.dao.CategoryDaoSqlite;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
